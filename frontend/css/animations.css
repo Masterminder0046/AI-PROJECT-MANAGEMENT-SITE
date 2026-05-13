@@ -1,0 +1,11 @@
+.fade-in { animation: fadeIn .4s ease both; }
+.slide-up { animation: slideUp .45s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+@keyframes slideUp { from{opacity:0; transform:translateY(12px)} to{opacity:1; transform:translateY(0)} }
+
+.skeleton {
+  background: linear-gradient(90deg, var(--surface) 0%, var(--surface-strong) 50%, var(--surface) 100%);
+  background-size: 200% 100%; animation: shimmer 1.4s infinite;
+  border-radius: 10px;
+}
+@keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }

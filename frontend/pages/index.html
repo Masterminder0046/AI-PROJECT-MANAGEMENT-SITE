@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Synapse — AI Project Management</title>
+    <meta name="description" content="The AI-powered workspace for modern teams. Plan, ship, and analyze with realtime collaboration." />
+    <link rel="stylesheet" href="/css/global.css" />
+    <link rel="stylesheet" href="/css/dashboard.css" />
+    <style>
+        .hero {
+            padding: 120px 24px 80px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .hero h1 {
+            font-size: 72px;
+            line-height: 1.05;
+            letter-spacing: -0.04em;
+            margin-bottom: 24px;
+        }
+        .hero p {
+            font-size: 20px;
+            color: var(--text-dim);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 1100px;
+            margin: 0 auto 120px;
+            padding: 0 24px;
+        }
+        .feature-card {
+            padding: 32px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+        }
+        .feature-card h3 {
+            margin-bottom: 12px;
+            font-size: 18px;
+        }
+        .feature-card p {
+            color: var(--text-dim);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 48px; }
+            .feature-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<header style="height: 72px; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; border-bottom: 1px solid var(--border); background: rgba(9,9,11,0.8); backdrop-filter: blur(8px); position: sticky; top: 0; z-index: 100;">
+    <div class="flex items-center gap-2">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+        <span class="font-medium" style="font-size: 18px; letter-spacing: -0.02em;">Synapse</span>
+    </div>
+    <nav class="flex gap-8 text-sm font-medium" style="color: var(--text-dim);">
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="/pages/login.html" style="color: var(--text);">Sign in</a>
+    </nav>
+    <a href="/pages/register.html" class="btn btn-primary">Get Started</a>
+</header>
+
+<section class="hero slide-up">
+    <div style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 20px; font-size: 12px; font-weight: 600; color: var(--accent); margin-bottom: 24px;">
+        <span style="display: block; width: 6px; height: 6px; background: var(--accent); border-radius: 50%;"></span>
+        Now in public beta
+    </div>
+    <h1>Real-time tasks<br/><span class="gradient-text">built for speed.</span></h1>
+    <p>Synapse combines the power of AI planning with a lightning-fast interface to help modern teams ship software without the overhead.</p>
+    <div class="flex justify-center gap-4">
+        <a href="/pages/register.html" class="btn btn-primary" style="padding: 12px 32px; font-size: 14px;">Get started for free</a>
+        <a href="#features" class="btn" style="padding: 12px 32px; font-size: 14px;">View features</a>
+    </div>
+</section>
+
+<section id="features" class="feature-grid slide-up" style="animation-delay: 0.2s;">
+    <div class="feature-card">
+        <h3>AI-Powered Planning</h3>
+        <p>Describe your project idea and let Synapse generate a full roadmap with milestones and actionable tasks.</p>
+    </div>
+    <div class="feature-card">
+        <h3>Real-time Sync</h3>
+        <p>Collaborate with your team instantly. See status changes, new tasks, and comments as they happen.</p>
+    </div>
+    <div class="feature-card">
+        <h3>Task Intelligence</h3>
+        <p>Smart subtask generation and effort estimation help you break down complex work in seconds.</p>
+    </div>
+</section>
+
+<section id="pricing" style="padding: 80px 24px; text-align: center; border-top: 1px solid var(--border);">
+    <h2 style="margin-bottom: 16px;">Simple, transparent pricing.</h2>
+    <p style="color: var(--text-dim); margin-bottom: 48px;">No hidden fees. Start for free and upgrade as you grow.</p>
+    
+    <div class="grid cols-3" style="max-width: 1000px; margin: 0 auto;">
+        <div class="card" style="padding: 32px; text-align: left; display: flex; flex-direction: column;">
+            <div class="text-xs font-medium text-dim mb-2 uppercase">Starter</div>
+            <div style="font-size: 32px; font-weight: 700; margin-bottom: 8px;">$0</div>
+            <p class="text-sm text-dim mb-8">For individuals and small side projects.</p>
+            <ul style="list-style: none; padding: 0; margin: 0 0 32px; font-size: 13px; display: grid; gap: 12px;">
+                <li class="flex items-center gap-2">✓ Unlimited projects</li>
+                <li class="flex items-center gap-2">✓ Basic AI planning</li>
+                <li class="flex items-center gap-2">✓ 2 team members</li>
+            </ul>
+            <a href="/pages/register.html" class="btn" style="margin-top: auto;">Get started</a>
+        </div>
+        
+        <div class="card" style="padding: 32px; text-align: left; border-color: var(--accent); background: rgba(59, 130, 246, 0.03); display: flex; flex-direction: column;">
+            <div class="text-xs font-medium text-dim mb-2 uppercase" style="color: var(--accent);">Professional</div>
+            <div style="font-size: 32px; font-weight: 700; margin-bottom: 8px;">$12 <span style="font-size: 14px; font-weight: 400; color: var(--text-dim);">/mo</span></div>
+            <p class="text-sm text-dim mb-8">For growing startups and product teams.</p>
+            <ul style="list-style: none; padding: 0; margin: 0 0 32px; font-size: 13px; display: grid; gap: 12px;">
+                <li class="flex items-center gap-2">✓ Everything in Starter</li>
+                <li class="flex items-center gap-2">✓ Advanced AI analytics</li>
+                <li class="flex items-center gap-2">✓ Unlimited team members</li>
+                <li class="flex items-center gap-2">✓ Priority support</li>
+            </ul>
+            <a href="/pages/register.html" class="btn btn-primary" style="margin-top: auto;">Upgrade now</a>
+        </div>
+
+        <div class="card" style="padding: 32px; text-align: left; display: flex; flex-direction: column;">
+            <div class="text-xs font-medium text-dim mb-2 uppercase">Enterprise</div>
+            <div style="font-size: 32px; font-weight: 700; margin-bottom: 8px;">Custom</div>
+            <p class="text-sm text-dim mb-8">For organizations requiring scale and control.</p>
+            <ul style="list-style: none; padding: 0; margin: 0 0 32px; font-size: 13px; display: grid; gap: 12px;">
+                <li class="flex items-center gap-2">✓ Custom integrations</li>
+                <li class="flex items-center gap-2">✓ SSO / SAML</li>
+                <li class="flex items-center gap-2">✓ Dedicated manager</li>
+            </ul>
+            <a href="mailto:sales@synapse.ai" class="btn" style="margin-top: auto;">Contact sales</a>
+        </div>
+    </div>
+</section>
+
+<footer style="padding: 80px 40px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; color: var(--text-muted); font-size: 13px;">
+    <div>© 2026 Synapse Technologies Inc.</div>
+    <div class="flex gap-8">
+        <a href="#">Twitter</a>
+        <a href="#">GitHub</a>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+    </div>
+</footer>
+
+</body>
+</html>

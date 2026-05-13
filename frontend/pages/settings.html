@@ -1,0 +1,63 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Settings</title>
+<link rel="stylesheet" href="/css/global.css"><link rel="stylesheet" href="/css/dashboard.css"></head>
+<body data-page="settings"><div class="app-shell"><aside class="sidebar"><div class="brand gradient-text">Synapse</div><nav><a href="/pages/dashboard.html">🏠 Dashboard</a><a class="active" href="/pages/settings.html">⚙️ Settings</a></nav></aside>
+<div><div class="topbar"><h2>Workspace Settings</h2></div>
+<main class="main">
+    <div id="adminPanel" style="display:none">
+        <div class="glass" style="padding:2rem">
+            <h3 class="mb-4">User Management</h3>
+            <div style="overflow-x:auto">
+                <table style="width:100%; text-align:left; border-collapse:collapse;">
+                    <thead><tr style="border-bottom:1px solid #333"><th class="p-2">User</th><th>Current Role</th><th>Actions</th></tr></thead>
+                    <tbody id="userList"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div id="nonAdminMsg" class="glass" style="padding:2rem">Only workspace administrators can access settings.</div>
+</main></div></div>
+<script src="/js/utils.js"></script><script src="/js/api.js"></script><script src="/js/auth.js"></script>
+<script src="/js/websocket.js"></script><script src="/js/notifications.js"></script><script src="/js/app.js"></script>
+<script>
+(async () => {
+    const me = await API.api("/auth/me/");
+    if (me.role !== "admin") return;
+    
+    document.getElementById("adminPanel").style.display = "block";
+    document.getElementById("nonAdminMsg").style.display = "none";
+    
+    const users = await API.api("/users/");
+    const list = document.getElementById("userList");
+    list.innerHTML = (users.results || users).map(u => `
+        <tr style="border-bottom:1px solid #222">
+            <td class="p-2">
+                <div style="display:flex; align-items:center; gap:0.5rem">
+                    <div style="width:32px; height:32px; border-radius:50%; background:#333; display:flex; align-items:center; justify-content:center; font-size:0.8rem">
+                        ${u.avatar ? `<img src="${u.avatar}" style="width:100%; height:100%; border-radius:50%; object-fit:cover">` : (u.first_name || u.email)[0].toUpperCase()}
+                    </div>
+                    <div>
+                        <div style="font-weight:500">${U.escapeHtml(u.first_name || u.username)}</div>
+                        <div class="text-xs text-dim">${U.escapeHtml(u.email)} ${u.id === me.id ? '(You)' : ''}</div>
+                    </div>
+                </div>
+            </td>
+            <td><span class="priority-pill priority-medium" style="background:rgba(255,255,255,0.05)">${u.role}</span></td>
+            <td>
+                ${u.id === me.id ? '' : `
+                <select class="input" style="padding:0.2rem 0.5rem; width:auto; font-size:0.8rem" onchange="updateRole(${u.id}, this.value)">
+                    <option value="developer" ${u.role==='developer'?'selected':''}>Developer</option>
+                    <option value="manager" ${u.role==='manager'?'selected':''}>Manager</option>
+                    <option value="admin" ${u.role==='admin'?'selected':''}>Admin</option>
+                </select>`}
+            </td>
+        </tr>
+    `).join("");
+})();
+
+async function updateRole(userId, newRole) {
+    try {
+        await API.api(`/users/${userId}/`, { method: "PATCH", body: { role: newRole } });
+        U.toast("Role updated successfully", "success");
+    } catch (err) { U.toast(err.message, "error"); }
+}
+</script></body></html>

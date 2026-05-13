@@ -1,0 +1,111 @@
+/* Dashboard - Mobile First */
+
+.dashboard-main-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding: var(--space-4);
+  width: 100%;
+}
+
+@media (min-width: 1280px) {
+  .dashboard-main-grid {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    padding: var(--space-8);
+    gap: var(--space-8);
+  }
+}
+
+/* Stat Cards */
+.stat-card {
+  padding: var(--space-4);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+}
+
+.stat-card .label {
+  color: var(--text-dim);
+  font-size: var(--font-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.stat-card .value {
+  font-size: var(--font-xl);
+  font-weight: 700;
+  margin-top: var(--space-1);
+}
+
+/* Project Cards */
+.project-card {
+  padding: var(--space-4);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.project-card:hover {
+  border-color: var(--border-strong);
+  background: var(--bg-surface-strong);
+  transform: translateY(-2px);
+}
+
+/* Activity Feed */
+.activity-pane {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+@media (min-width: 1280px) {
+  .activity-pane {
+    position: sticky;
+    top: calc(var(--header-height) + var(--space-8));
+    height: calc(100vh - var(--header-height) - var(--space-8) * 2);
+    overflow-y: auto;
+  }
+}
+
+.activity-item {
+  padding: var(--space-3);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: var(--font-sm);
+  animation: slideIn 0.3s ease-out forwards;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Search Bar - Responsive width */
+.search-container {
+  max-width: 100%;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .search-container { width: 320px; }
+}
+
+@media (min-width: 1200px) {
+  .search-container { width: 440px; }
+}
+
+#searchResults {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  max-height: 400px;
+  overflow-y: auto;
+  z-index: 100;
+}

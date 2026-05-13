@@ -1,0 +1,4 @@
+@media (max-width: 900px) {
+  .topbar { flex-wrap: wrap; gap: .5rem; }
+  .main { padding: 1rem; }
+}

@@ -1,0 +1,11 @@
+/* Toast notifications */
+.toast-stack { position: fixed; right: 20px; bottom: 20px; display: flex; flex-direction: column; gap: .6rem; z-index: 9999; }
+.toast { padding: .9rem 1.1rem; min-width: 260px; max-width: 360px; border-radius: 12px;
+  background: var(--surface-strong); border: 1px solid var(--border); backdrop-filter: blur(12px);
+  animation: slideUp .25s ease; }
+.toast.success { border-color: rgba(34,197,94,.4); }
+.toast.error { border-color: rgba(239,68,68,.5); }
+
+/* Modal */
+.modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.6); display: grid; place-items: center; z-index: 9000; }
+.modal { width: 100%; max-width: 540px; padding: 1.6rem; }

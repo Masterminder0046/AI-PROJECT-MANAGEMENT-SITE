@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Create account — Synapse</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/auth.css">
+</head>
+<body data-page="register">
+<div class="auth-wrap">
+    <div class="auth-card slide-up">
+        <div class="brand">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin: 0 auto;"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+        </div>
+        <h1>Create your workspace</h1>
+        <p class="sub">Join 10,000+ teams shipping faster with AI.</p>
+        
+        <form id="registerForm">
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px;">
+                <div style="display:grid; gap:8px;">
+                    <label class="text-xs font-medium text-dim">Full Name</label>
+                    <input class="input" name="first_name" placeholder="John Doe" required />
+                </div>
+                <div style="display:grid; gap:8px;">
+                    <label class="text-xs font-medium text-dim">Username</label>
+                    <input class="input" name="username" placeholder="johndoe" required />
+                </div>
+            </div>
+            <div style="display:grid; gap:8px;">
+                <label class="text-xs font-medium text-dim">Email Address</label>
+                <input class="input" type="email" name="email" placeholder="name@company.com" required />
+            </div>
+            <div style="display:grid; gap:8px;">
+                <label class="text-xs font-medium text-dim">Password</label>
+                <input class="input" type="password" name="password" placeholder="Min. 8 characters" minlength="8" required />
+            </div>
+            <button class="btn btn-primary" type="submit" style="margin-top: 8px;">Create account</button>
+        </form>
+
+        <p class="meta">Already have an account? <a href="/pages/login.html">Sign in</a></p>
+    </div>
+</div>
+
+<script src="/js/utils.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/auth.js"></script>
+<script>
+document.getElementById("registerForm").addEventListener("submit", async (e) => {
+  e.preventDefault(); 
+  const f = e.target;
+  const btn = f.querySelector('button[type="submit"]');
+  btn.disabled = true;
+  btn.textContent = "Creating account...";
+  
+  try { 
+    await Auth.register({
+      first_name: f.first_name.value, 
+      username: f.username.value,
+      email: f.email.value, 
+      password: f.password.value 
+    }); 
+  } catch (err) { 
+    U.toast("Sign up failed: " + err.message, "error"); 
+    btn.disabled = false;
+    btn.textContent = "Create account";
+  }
+});
+</script>
+</body>
+</html>

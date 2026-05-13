@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Sign in — Synapse</title>
+    <link rel="stylesheet" href="/css/global.css?v=4">
+    <link rel="stylesheet" href="/css/auth.css?v=4">
+</head>
+<body data-page="login">
+<div class="auth-wrap">
+    <div class="auth-card slide-up">
+        <div class="brand">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin: 0 auto;"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+        </div>
+        <h1>Welcome back</h1>
+        <p class="sub">Log in to your Synapse account</p>
+        
+        <form id="loginForm">
+            <div style="display:grid; gap:8px;">
+                <label class="text-xs font-medium text-dim">Email Address</label>
+                <input class="input" type="email" name="email" placeholder="name@company.com" required />
+            </div>
+            <div style="display:grid; gap:8px;">
+                <label class="text-xs font-medium text-dim">Password</label>
+                <input class="input" type="password" name="password" placeholder="••••••••" required />
+            </div>
+            <button class="btn btn-primary" type="submit" style="margin-top: 8px;">Sign in</button>
+        </form>
+
+        <div class="divider">or</div>
+
+        <button class="btn" type="button" onclick="U.toast('Google OAuth requires configuration', 'info')" style="width: 100%;">
+            <svg style="width:16px; height:16px; margin-right: 8px;" viewBox="0 0 24 24"><path fill="currentColor" d="M21.35,11.1H12.18V13.83H18.69C18.36,17.64 15.19,19.27 12.19,19.27C9.03,19.27 6.59,16.74 6.59,13.5C6.59,10.26 9.03,7.73 12.19,7.73C14.05,7.73 15.6,8.42 16.73,9.57L18.66,7.44C17.19,6.03 15.04,5 12.19,5C7.5,5 3.74,8.81 3.74,13.5C3.74,18.19 7.5,22 12.19,22C16.88,22 21.54,18.42 21.54,13.5C21.54,12.71 21.45,11.88 21.35,11.1Z" /></svg>
+            Continue with Google
+        </button>
+
+        <p class="meta">Don't have an account? <a href="/pages/register.html">Sign up</a></p>
+    </div>
+</div>
+
+<script src="/js/utils.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/auth.js"></script>
+<script>
+document.getElementById("loginForm").addEventListener("submit", async (e) => {
+  e.preventDefault(); 
+  const f = e.target;
+  const btn = f.querySelector('button[type="submit"]');
+  btn.disabled = true;
+  btn.textContent = "Signing in...";
+  
+  try { 
+    await Auth.login(f.email.value, f.password.value); 
+  } catch (err) { 
+    U.toast(err.message, "error"); 
+    btn.disabled = false;
+    btn.textContent = "Sign in";
+  }
+});
+</script>
+</body>
+</html>
