@@ -9,7 +9,7 @@ channels-redis==4.2.0
 daphne==4.1.2
 gunicorn==22.0.0
 
-mysqlclient==2.2.4
+
 redis==5.0.7
 
 Pillow==10.4.0
