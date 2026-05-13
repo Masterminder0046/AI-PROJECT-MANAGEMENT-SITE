@@ -8,3 +8,4 @@ openai
 mysqlclient
 celery==5.4.0
 python-decouple
+djangorestframework-simplejwt
