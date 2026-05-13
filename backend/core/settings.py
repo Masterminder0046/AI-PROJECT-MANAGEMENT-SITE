@@ -78,12 +78,14 @@ TEMPLATES = [{
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": config("MYSQL_DATABASE", default="saas"),
-        "USER": config("MYSQL_USER", default="saas"),
-        "PASSWORD": config("MYSQL_PASSWORD", default="saas"),
-        "HOST": config("MYSQL_HOST", default="mysql"),
-        "PORT": config("MYSQL_PORT", default="3306"),
-        "OPTIONS": {"charset": "utf8mb4"},
+        "NAME": config("MYSQLDATABASE", default="railway"),
+        "USER": config("MYSQLUSER", default="root"),
+        "PASSWORD": config("MYSQLPASSWORD", default=""),
+        "HOST": config("MYSQLHOST", default="localhost"),
+        "PORT": config("MYSQLPORT", default="3306"),
+        "OPTIONS": {
+            "charset": "utf8mb4",
+        },
     }
 }
 
