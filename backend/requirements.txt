@@ -7,4 +7,4 @@ redis
 openai
 mysqlclient
 celery==5.4.0
-decouple
+python-decouple
