@@ -1,3 +1,4 @@
+
 # AI Project Management SaaS
 
 Production-ready scaffold: Django + DRF + Channels + MySQL + Redis + OpenAI, with a vanilla JS / Tailwind frontend.
