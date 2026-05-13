@@ -6,3 +6,5 @@ gunicorn==22.0.0
 redis
 openai
 mysqlclient
+celery==5.4.0
+
