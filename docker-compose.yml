@@ -1,18 +1,17 @@
 services:
-  mysql:
-    image: mysql:8.0
+  postgres:
+    image: postgres:15-alpine
     restart: always
     environment:
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-    volumes:
-      - mysql_data:/var/lib/mysql
+      POSTGRES_DB: saas
+      POSTGRES_USER: saas
+      POSTGRES_PASSWORD: saas
+    volumes:      
+      - postgres_data:/var/lib/postgresql/data
     ports:
-      - "3306:3306"
+      - "5432:5432"
     healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p${MYSQL_ROOT_PASSWORD}" ]
+      test: [ "CMD-SHELL", "pg_isready -U saas -d saas" ]
       interval: 5s
       retries: 20
 
@@ -32,7 +31,7 @@ services:
       - media_data:/app/media
       - static_data:/app/static
     depends_on:
-      mysql:
+      postgres:
         condition: service_healthy
       redis:
         condition: service_started
@@ -75,7 +74,7 @@ services:
     volumes:
       - ./backend:/app
     depends_on:
-      mysql:
+      postgres:
         condition: service_healthy
       redis:
         condition: service_started
@@ -87,12 +86,12 @@ services:
     volumes:
       - ./backend:/app
     depends_on:
-      mysql:
+      postgres:
         condition: service_healthy
       redis:
         condition: service_started
 
 volumes:
-  mysql_data:
+  postgres_data:
   media_data:
   static_data:
