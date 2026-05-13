@@ -1,0 +1,60 @@
+services:
+  - type: web
+    name: saas-backend
+    env: docker
+    region: frankfurt
+    plan: starter
+    dockerfilePath: ./backend/Dockerfile
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: saas-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: saas-redis
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "0"
+      - key: ALLOWED_HOSTS
+        value: "*"
+    startCommand: "gunicorn core.asgi:application -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT"
+
+  - type: worker
+    name: saas-celery
+    env: docker
+    region: frankfurt
+    plan: starter
+    dockerfilePath: ./backend/Dockerfile
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: saas-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: saas-redis
+          property: connectionString
+      - key: SECRET_KEY
+        fromService:
+          type: web
+          name: saas-backend
+          property: envVar
+          envVarKey: SECRET_KEY
+    startCommand: "celery -A core worker -l info"
+
+  - type: redis
+    name: saas-redis
+    region: frankfurt
+    plan: free
+
+databases:
+  - name: saas-db
+    region: frankfurt
+    plan: free
+    databaseName: saas
+    user: saas
