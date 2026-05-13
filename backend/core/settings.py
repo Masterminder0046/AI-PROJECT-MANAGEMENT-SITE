@@ -5,6 +5,8 @@ from pathlib import Path
 from datetime import timedelta
 
 from decouple import config, Csv
+import dj_database_url
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -110,38 +112,9 @@ TEMPLATES = [
 ]
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-
-        "NAME": config(
-            "MYSQLDATABASE",
-            default="railway"
-        ),
-
-        "USER": config(
-            "MYSQLUSER",
-            default="root"
-        ),
-
-        "PASSWORD": config(
-            "MYSQLPASSWORD",
-            default=""
-        ),
-
-        "HOST": config(
-            "MYSQLHOST",
-            default="localhost"
-        ),
-
-        "PORT": config(
-            "MYSQLPORT",
-            default="3306"
-        ),
-
-        "OPTIONS": {
-            "charset": "utf8mb4",
-        },
-    }
+    "default": dj_database_url.config(
+        default=config("DATABASE_URL")
+    )
 }
 
 AUTH_USER_MODEL = "accounts.User"
