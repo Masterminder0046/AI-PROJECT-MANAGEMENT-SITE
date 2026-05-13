@@ -8,7 +8,7 @@ channels-redis==4.2.0
 daphne==4.1.2
 gunicorn==22.0.0
 uvicorn[standard]==0.30.1
-psycopg2-binary==2.9.9
+psycopg[binary]==3.1.18
 dj-database-url==2.1.0
 redis==5.0.7
 Pillow==10.4.0
